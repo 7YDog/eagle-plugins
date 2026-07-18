@@ -1,0 +1,26 @@
+{
+  "id": "VJPG1S7YDOG01",
+  "version": "1.2.0",
+  "platform": "all",
+  "arch": "all",
+  "name": "视频每秒导出 JPG",
+  "logo": "/logo.png",
+  "keywords": [
+    "video",
+    "jpg",
+    "ffmpeg",
+    "export"
+  ],
+  "devTools": false,
+  "main": {
+    "url": "index.html",
+    "width": 520,
+    "height": 560,
+    "minWidth": 480,
+    "minHeight": 500,
+    "multiple": false
+  },
+  "dependencies": [
+    "ffmpeg"
+  ]
+}

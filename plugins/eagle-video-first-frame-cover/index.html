@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提取首帧封面</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="title-bar">
+        <div class="title">提取首帧封面</div>
+        <div class="close-btn" id="closeBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="hero">
+                <div class="hero-icon">
+                    <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                    </svg>
+                </div>
+                <h2>切换首帧封面</h2>
+                <p>自动提取第 0 秒第 1 帧画面并设置为所选视频的缩略图。</p>
+            </div>
+            
+            <div class="status-box" id="statusBox">
+                <div class="status-text" id="statusText">等待操作...</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <button class="action-btn" id="startBtn">一键提取并设为封面</button>
+        </div>
+        
+        <div class="console-wrapper">
+            <div class="console-header">
+                <span>运行日志</span>
+                <button class="clear-btn" id="clearLogBtn">清除日志</button>
+            </div>
+            <div class="console-body" id="consoleBody"></div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
