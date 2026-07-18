@@ -8,6 +8,8 @@
 | --- | --- | --- | --- |
 | 封面路径助手 | 1.1.0 | 在后台复制当前选中素材的 PNG 封面路径 | [`plugins/eagle-cover-path-helper`](plugins/eagle-cover-path-helper) |
 | 格式重命名 | 1.0.1 | 按文件夹、日期和序号规则批量重命名选中项目 | [`plugins/eagle-format-renamer`](plugins/eagle-format-renamer) |
+| 切换视频首帧封面 | 1.0.1 | 提取所选视频的首帧并设为 Eagle 自定义封面 | [`plugins/eagle-video-first-frame-cover`](plugins/eagle-video-first-frame-cover) |
+| 视频每秒导出 JPG | 1.2.0 | 将所选视频按每秒一张导出为 JPG 图片 | [`plugins/eagle-video-jpg-exporter`](plugins/eagle-video-jpg-exporter) |
 
 ## 仓库结构
 
@@ -15,6 +17,8 @@
 plugins/
   eagle-cover-path-helper/  # 封面路径助手源码
   eagle-format-renamer/     # 格式重命名源码
+  eagle-video-first-frame-cover/ # 切换视频首帧封面源码
+  eagle-video-jpg-exporter/      # 视频每秒导出 JPG 源码
 packages/                   # 本地安装包，仅用于发布 Release
 ```
 

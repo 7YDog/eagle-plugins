@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频每秒导出 JPG</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="logo">JPG</div>
+      <div>
+        <h1>视频每秒导出 JPG</h1>
+        <p id="status">已准备好</p>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="row">
+        <span>导出规则</span>
+        <strong>JPG / 每秒 1 张</strong>
+      </div>
+      <div class="row">
+        <span>命名</span>
+        <strong id="namingHint">文件夹/000001.jpg</strong>
+      </div>
+      <div class="row">
+        <span>范围</span>
+        <strong id="selection">点击开始后读取当前选择</strong>
+      </div>
+      <label class="option-row">
+        <span>
+          <span class="option-title">每个视频单独文件夹</span>
+          <span class="option-note">适合 OCR，自动按视频标题分组</span>
+        </span>
+        <input id="separateFolders" type="checkbox" checked>
+      </label>
+    </section>
+
+    <section class="log-panel">
+      <div class="log-head">
+        <h2>日志</h2>
+        <button id="analyzeBtn" class="ghost" type="button">检测日志</button>
+      </div>
+      <pre id="logOutput">等待开始...</pre>
+      <p id="analysis" class="analysis">检测结果会显示在这里。</p>
+    </section>
+
+    <footer class="footer">
+      <button id="startBtn" class="primary" type="button">开始导出</button>
+    </footer>
+  </main>
+
+  <script src="./js/plugin.js"></script>
+</body>
+</html>

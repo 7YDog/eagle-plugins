@@ -17,5 +17,7 @@
 
 - `codex-cover-path-helper`
 - `codex-format-renamer`
+- `SWITCH_VIDEO_COVER_PLUGIN`
+- `VJPG1S7YDOG01`
 
 如需恢复其他插件，请优先通过 Eagle 官方插件渠道或原作者提供的下载渠道重新安装。
