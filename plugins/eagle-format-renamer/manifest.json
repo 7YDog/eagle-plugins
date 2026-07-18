@@ -1,0 +1,25 @@
+{
+  "id": "codex-format-renamer",
+  "version": "1.0.1",
+  "platform": "all",
+  "arch": "all",
+  "name": "{{manifest.app.name}}",
+  "logo": "./logo.png",
+  "keywords": ["rename", "batch", "format", "video"],
+  "fallbackLanguage": "zh_CN",
+  "languages": ["zh_CN"],
+  "devTools": false,
+  "main": {
+    "runAfterInstall": false,
+    "serviceMode": false,
+    "frame": true,
+    "childWindow": true,
+    "url": "index.html",
+    "width": 920,
+    "minWidth": 760,
+    "height": 680,
+    "minHeight": 560,
+    "resizable": true,
+    "opacity": 1
+  }
+}

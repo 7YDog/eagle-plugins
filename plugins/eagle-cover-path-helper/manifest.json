@@ -1,0 +1,28 @@
+{
+  "id": "codex-cover-path-helper",
+  "version": "1.1.0",
+  "platform": "all",
+  "arch": "all",
+  "name": "{{manifest.app.name}}",
+  "logo": "./logo.png",
+  "keywords": ["path", "cover", "upload", "clipboard"],
+  "fallbackLanguage": "zh_CN",
+  "languages": ["zh_CN"],
+  "devTools": false,
+  "main": {
+    "runAfterInstall": false,
+    "serviceMode": true,
+    "frame": false,
+    "childWindow": true,
+    "url": "index.html",
+    "width": 1,
+    "minWidth": 1,
+    "maxWidth": 1,
+    "height": 1,
+    "minHeight": 1,
+    "maxHeight": 1,
+    "resizable": false,
+    "opacity": 0,
+    "followCursor": false
+  }
+}

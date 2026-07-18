@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>格式重命名</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <h1>格式重命名</h1>
+          <p id="selectionSummary">正在读取选中项</p>
+        </div>
+        <div class="top-actions">
+          <button id="refreshButton" class="ghost-button" type="button">刷新</button>
+          <button id="renameButton" class="primary-button" type="button">执行重命名</button>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="settings-panel" aria-label="重命名设置">
+          <label class="field-label" for="patternInput">规则</label>
+          <textarea id="patternInput" rows="3" spellcheck="false" placeholder="%F-发布%N"></textarea>
+
+          <div class="token-row" aria-label="插入规则">
+            <button class="token-button" type="button" data-token="%F">%F 文件夹</button>
+            <button class="token-button" type="button" data-token="%D">%D 日期</button>
+            <button class="token-button" type="button" data-token="%N">%N 序号</button>
+          </div>
+
+          <div class="grid two-columns">
+            <label class="field-block" for="startInput">
+              <span>起始序号</span>
+              <input id="startInput" type="number" min="0" step="1" value="1" />
+            </label>
+            <label class="field-block" for="stepInput">
+              <span>递增</span>
+              <input id="stepInput" type="number" min="1" step="1" value="1" />
+            </label>
+          </div>
+
+          <label class="field-block" for="paddingInput">
+            <span>序号位数</span>
+            <select id="paddingInput">
+              <option value="0">不补零</option>
+              <option value="2">01</option>
+              <option value="3">001</option>
+              <option value="4">0001</option>
+            </select>
+          </label>
+
+          <div class="grid two-columns">
+            <label class="field-block" for="dateSourceInput">
+              <span>日期来源</span>
+              <select id="dateSourceInput">
+                <option value="today">今天</option>
+                <option value="createdAt">文件创建</option>
+                <option value="modifiedAt">文件修改</option>
+              </select>
+            </label>
+            <label class="field-block" for="dateFormatInput">
+              <span>日期格式</span>
+              <select id="dateFormatInput">
+                <option value="M月D日">7月6日</option>
+                <option value="YYYY-MM-DD">2026-07-06</option>
+                <option value="YYYYMMDD">20260706</option>
+                <option value="YYMMDD">260706</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="checkbox-row">
+            <input id="sanitizeInput" type="checkbox" checked />
+            <span>替换非法字符</span>
+          </label>
+
+          <div class="history-header">
+            <h2>常用记录</h2>
+            <button id="saveRuleButton" class="ghost-button compact" type="button">保存</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+          <button id="clearHistoryButton" class="text-button" type="button">清空记录</button>
+        </aside>
+
+        <section class="preview-panel" aria-label="重命名预览">
+          <div class="preview-toolbar">
+            <h2>预览</h2>
+            <span id="statusText"></span>
+          </div>
+          <div class="preview-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>原名称</th>
+                  <th>新名称</th>
+                  <th>文件夹</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody id="previewBody"></tbody>
+            </table>
+            <div id="emptyState" class="empty-state">
+              <strong>没有可预览的项目</strong>
+              <span>请在 Eagle 里先选中一个或多个文件。</span>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
