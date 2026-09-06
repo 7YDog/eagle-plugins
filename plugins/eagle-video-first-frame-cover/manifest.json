@@ -1,0 +1,42 @@
+{
+  "id": "SWITCH_VIDEO_COVER_PLUGIN",
+  "version": "1.0.6",
+  "platform": "all",
+  "arch": "all",
+  "name": "切换视频首帧封面",
+  "logo": "logo.png",
+  "keywords": [
+    "video",
+    "cover",
+    "thumbnail",
+    "ffmpeg",
+    "视频",
+    "封面",
+    "首帧"
+  ],
+  "dependencies": [
+    "ffmpeg"
+  ],
+  "devTools": false,
+  "main": {
+    "runAfterInstall": false,
+    "serviceMode": true,
+    "frame": false,
+    "childWindow": true,
+    "url": "index.html",
+    "width": 1,
+    "minWidth": 1,
+    "maxWidth": 1,
+    "height": 1,
+    "minHeight": 1,
+    "maxHeight": 1,
+    "resizable": false,
+    "opacity": 0,
+    "followCursor": false,
+    "alwaysOnTop": false,
+    "fullscreenable": false,
+    "maximizable": false,
+    "minimizable": false,
+    "multiple": false
+  }
+}

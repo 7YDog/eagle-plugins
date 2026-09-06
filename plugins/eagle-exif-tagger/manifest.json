@@ -1,0 +1,29 @@
+{
+  "id": "eagle-exif-tagger",
+  "version": "0.1.1",
+  "platform": "all",
+  "arch": "all",
+  "name": "相册工具 - EXIF 标签",
+  "logo": "/logo.png",
+  "keywords": ["exif", "tag", "camera", "lens", "video", "log", "rec709"],
+  "devTools": false,
+  "main": {
+    "url": "index.html",
+    "width": 560,
+    "height": 620,
+    "minWidth": 440,
+    "minHeight": 520,
+    "maxWidth": 760,
+    "maxHeight": 820,
+    "alwaysOnTop": false,
+    "frame": true,
+    "fullscreenable": false,
+    "maximizable": true,
+    "minimizable": true,
+    "resizable": true,
+    "backgroundColor": "#f6f6f3",
+    "childWindow": true,
+    "followCursor": false,
+    "multiple": false
+  }
+}

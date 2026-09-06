@@ -1,0 +1,22 @@
+# Dependencies / vendor caches (keep on disk for local run; do not commit)
+**/node_modules/
+
+# Eagle runtime / OS junk
+**/window-state.json
+**/.DS_Store
+**/*.log
+debug.log
+
+# Optional local-only trees
+packages/
+archive/
+
+# Editor / env
+.idea/
+.vscode/
+*.swp
+.env
+.env.*
+
+# Local work log
+STATUS.md

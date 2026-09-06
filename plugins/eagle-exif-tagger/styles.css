@@ -1,0 +1,300 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f6f3;
+  --surface: #ffffff;
+  --surface-soft: #eeeeea;
+  --ink: #20211f;
+  --muted: #696b65;
+  --line: #ddded7;
+  --green: #2f7d5f;
+  --green-dark: #215f48;
+  --blue: #376a9e;
+  --red: #a5453d;
+  --shadow: 0 12px 28px rgba(30, 32, 28, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.app-shell {
+  display: grid;
+  gap: 14px;
+  min-height: 100vh;
+  padding: 18px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 720;
+}
+
+.topbar p {
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+.status-pill {
+  min-width: 72px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--surface);
+  color: var(--muted);
+  text-align: center;
+}
+
+.status-pill.busy {
+  color: var(--blue);
+}
+
+.status-pill.done {
+  color: var(--green);
+}
+
+.status-pill.error {
+  color: var(--red);
+}
+
+.controls,
+.options,
+.results,
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: start;
+  gap: 12px;
+  padding: 12px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 194px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--surface-soft);
+}
+
+.segment {
+  min-height: 34px;
+  padding: 0 10px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.segment.active {
+  background: var(--ink);
+  color: #fff;
+}
+
+.primary,
+.ghost {
+  min-height: 34px;
+  border-radius: 7px;
+  padding: 0 13px;
+}
+
+.primary {
+  background: var(--ink);
+  color: #fff;
+}
+
+.primary.accent {
+  background: var(--green);
+}
+
+.primary.accent:not(:disabled):hover {
+  background: var(--green-dark);
+}
+
+.ghost {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 10px 12px;
+}
+
+.options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  color: var(--muted);
+}
+
+.panel {
+  overflow: hidden;
+}
+
+.panel-head,
+.results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 680;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.data-panel {
+  min-height: 168px;
+}
+
+.data-list {
+  display: grid;
+  align-content: start;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.empty {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.data-group {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+  padding: 11px 12px;
+}
+
+.data-label {
+  color: var(--muted);
+}
+
+.data-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.data-chip {
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: var(--surface-soft);
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-count {
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+.results {
+  min-height: 150px;
+  overflow: hidden;
+}
+
+.log {
+  display: grid;
+  align-content: start;
+  max-height: 190px;
+  overflow: auto;
+  padding: 8px 0;
+}
+
+.log-line {
+  padding: 4px 12px;
+  color: var(--muted);
+  word-break: break-word;
+}
+
+.log-line.ok {
+  color: var(--green);
+}
+
+.log-line.warn {
+  color: #8a6120;
+}
+
+.log-line.error {
+  color: var(--red);
+}
+
+@media (max-width: 760px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .segmented {
+    width: auto;
+    grid-column: span 2;
+  }
+
+  .data-group {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

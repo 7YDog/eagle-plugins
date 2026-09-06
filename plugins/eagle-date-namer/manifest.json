@@ -1,0 +1,29 @@
+{
+  "id": "eagle-date-namer",
+  "version": "0.1.5",
+  "platform": "all",
+  "arch": "all",
+  "name": "相册工具 - 照片日期命名",
+  "logo": "/logo.png",
+  "keywords": ["date", "rename", "photo", "exif", "icloud"],
+  "devTools": false,
+  "main": {
+    "url": "index.html",
+    "width": 720,
+    "height": 720,
+    "minWidth": 560,
+    "minHeight": 560,
+    "maxWidth": 1040,
+    "maxHeight": 920,
+    "alwaysOnTop": false,
+    "frame": true,
+    "fullscreenable": false,
+    "maximizable": true,
+    "minimizable": true,
+    "resizable": true,
+    "backgroundColor": "#f7f7f4",
+    "childWindow": true,
+    "followCursor": false,
+    "multiple": false
+  }
+}

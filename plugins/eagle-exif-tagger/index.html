@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXIF Tagger</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>EXIF Tagger</h1>
+          <p id="summary">等待扫描</p>
+        </div>
+        <div class="status-pill" id="statusPill">就绪</div>
+      </header>
+
+      <section class="controls" aria-label="扫描和写入">
+        <div class="segmented" role="group" aria-label="范围">
+          <button class="segment active" data-scope="selected" type="button">已选项目</button>
+          <button class="segment" data-scope="all" type="button">全部项目</button>
+        </div>
+
+        <button id="scanBtn" class="primary" type="button">扫描</button>
+        <button id="applyBtn" class="primary accent" type="button" disabled>写入</button>
+      </section>
+
+      <section class="options" aria-label="标签选项">
+        <label><input id="makeEnabled" type="checkbox" checked /> 厂商</label>
+        <label><input id="modelEnabled" type="checkbox" checked /> 型号</label>
+        <label><input id="lensEnabled" type="checkbox" checked /> 镜头型号</label>
+        <label><input id="colorEnabled" type="checkbox" checked /> 色彩曲线</label>
+      </section>
+
+      <section class="panel data-panel">
+        <div class="panel-head">
+          <h2>扫描数据</h2>
+          <span id="dataStats" class="muted">暂无数据</span>
+        </div>
+        <div class="data-list" id="valuesList"></div>
+      </section>
+
+      <section class="results">
+        <div class="results-head">
+          <h2>处理记录</h2>
+          <button id="clearLogBtn" class="ghost" type="button">清空</button>
+        </div>
+        <div id="log" class="log" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="./js/plugin.js"></script>
+  </body>
+</html>

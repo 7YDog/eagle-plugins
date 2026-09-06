@@ -1,0 +1,29 @@
+{
+  "id": "eagle-broken-link-cleaner",
+  "version": "0.1.0",
+  "platform": "all",
+  "arch": "all",
+  "name": "相册工具 - 文件坏链检测",
+  "logo": "/logo.png",
+  "keywords": ["broken", "missing", "link", "clean", "trash"],
+  "devTools": false,
+  "main": {
+    "url": "index.html",
+    "width": 620,
+    "height": 660,
+    "minWidth": 500,
+    "minHeight": 520,
+    "maxWidth": 900,
+    "maxHeight": 900,
+    "alwaysOnTop": false,
+    "frame": true,
+    "fullscreenable": false,
+    "maximizable": true,
+    "minimizable": true,
+    "resizable": true,
+    "backgroundColor": "#f7f7f4",
+    "childWindow": true,
+    "followCursor": false,
+    "multiple": false
+  }
+}

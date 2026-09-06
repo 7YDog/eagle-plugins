@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文件坏链检测</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>文件坏链检测</h1>
+          <p id="summary">等待扫描</p>
+        </div>
+        <div class="status-pill" id="statusPill">就绪</div>
+      </header>
+
+      <section class="controls" aria-label="扫描和清理">
+        <div class="segmented" role="group" aria-label="范围">
+          <button class="segment active" data-scope="folder" type="button">当前文件夹</button>
+          <button class="segment" data-scope="selected" type="button">已选项目</button>
+          <button class="segment" data-scope="all" type="button">全部项目</button>
+        </div>
+
+        <button id="scanBtn" class="primary" type="button">扫描</button>
+        <button id="stopBtn" class="ghost" type="button" disabled>停止</button>
+        <button id="trashBtn" class="danger" type="button" disabled>移入回收站</button>
+      </section>
+
+      <section class="results">
+        <div class="results-head">
+          <h2>坏链项目</h2>
+          <span id="resultStats" class="muted">暂无数据</span>
+        </div>
+        <div id="brokenList" class="broken-list" aria-live="polite"></div>
+      </section>
+
+      <section class="log-panel">
+        <div class="results-head">
+          <h2>处理记录</h2>
+          <button id="clearLogBtn" class="ghost" type="button">清空</button>
+        </div>
+        <div id="log" class="log" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="./js/plugin.js"></script>
+  </body>
+</html>

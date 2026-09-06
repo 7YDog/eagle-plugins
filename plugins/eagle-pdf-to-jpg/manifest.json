@@ -1,0 +1,30 @@
+{
+  "id": "pdf-to-jpg-converter",
+  "version": "1.1.0",
+  "platform": "all",
+  "arch": "all",
+  "name": "PDF 转 JPG",
+  "logo": "/logo.png",
+  "keywords": ["PDF", "JPG", "PDF 转图片", "格式转换", "pdf.js"],
+  "devTools": false,
+  "main": {
+    "url": "index.html",
+    "width": 380,
+    "height": 120,
+    "minWidth": 380,
+    "minHeight": 120,
+    "maxWidth": 380,
+    "maxHeight": 120,
+    "alwaysOnTop": false,
+    "frame": false,
+    "fullscreenable": false,
+    "maximizable": false,
+    "minimizable": false,
+    "resizable": false,
+    "backgroundColor": "#ffffff",
+    "childWindow": true,
+    "followCursor": false,
+    "multiple": false,
+    "runAfterInstall": false
+  }
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF 转 JPG</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      padding: 14px 18px;
+      color: #1f2937;
+    }
+
+    .status {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .title {
+      margin: 0 0 4px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .detail {
+      margin: 0 0 2px;
+      overflow: hidden;
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.4;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .params {
+      margin: 0;
+      overflow: hidden;
+      color: #9ca3af;
+      font-size: 11px;
+      line-height: 1.3;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .error { color: #b42318; }
+    .done { color: #087443; }
+  </style>
+</head>
+<body>
+  <main class="status" aria-live="polite">
+    <p id="title" class="title">准备转换…</p>
+    <p id="detail" class="detail">正在读取 Eagle 中已选的 PDF</p>
+    <p id="params" class="params"></p>
+  </main>
+
+  <script src="./vendor/pdf.min.js"></script>
+  <script src="./js/plugin.js"></script>
+</body>
+</html>
