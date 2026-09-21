@@ -1,0 +1,97 @@
+{
+  "manifest_version": 3,
+  "name": "医疗自媒体发布助手",
+  "version": "1.2.0",
+  "description": "专为医疗自媒体打造的多平台发布辅助：自动识别爱贝壳、百家号、抖音、视频号、小红书窗口，弹出对应专属智能悬浮窗。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "医疗自媒体发布助手 (点击切换 Chrome 个人资料医生)",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://baijiahao.baidu.com/*",
+    "https://creator.douyin.com/*",
+    "https://channels.weixin.qq.com/*",
+    "https://creator.xiaohongshu.com/*",
+    "https://paiban.md/*",
+    "http://localhost/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://baijiahao.baidu.com/*",
+        "https://creator.douyin.com/*",
+        "https://channels.weixin.qq.com/*",
+        "https://creator.xiaohongshu.com/*",
+        "https://paiban.md/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "content_scripts/bridge.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://baijiahao.baidu.com/builder/rc/edit*"
+      ],
+      "js": [
+        "content_scripts/baijiahao.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://creator.douyin.com/*"
+      ],
+      "js": [
+        "content_scripts/douyin.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://channels.weixin.qq.com/*"
+      ],
+      "js": [
+        "content_scripts/shipinhao.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://creator.xiaohongshu.com/*"
+      ],
+      "js": [
+        "content_scripts/xiaohongshu.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://paiban.md/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "content_scripts/aibeike.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

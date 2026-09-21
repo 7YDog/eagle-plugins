@@ -14,6 +14,11 @@
 | 照片日期命名 | eagle-date-namer | 0.1.5 | 相册三件套 |
 | EXIF 标签 | eagle-exif-tagger | 0.1.1 | 相册三件套 |
 | PDF 转 JPG | eagle-pdf-to-jpg（安装 id: pdf-to-jpg-converter） | 1.1.0 | pdf.js 统一版 |
+| 医疗自媒体发布助手 | medical-publisher-extension | 1.2.0 | Chrome 扩展：多医疗 IP 矩阵发布辅助，支持 Chrome 多资料隔离、百家号/抖音/视频号/小红书自动填充与防吞标签 |
+
+## 浏览器扩展程序
+
+- **[医疗自媒体发布助手 (Medical Publisher Extension)](plugins/medical-publisher-extension/README.md)**: 独立 Chrome 扩展（Manifest V3），专为周辉、徐伟光等医疗自媒体账号矩阵打造，详见完整使用与迭代文档。
 
 ## 相册工具
 

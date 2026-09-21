@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医疗自媒体发布助手</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        body {
+            width: 320px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #111827;
+            color: #f9fafb;
+            padding: 16px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #1f2937;
+        }
+        .header-icon {
+            font-size: 22px;
+        }
+        .header-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .header-subtitle {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+        .profile-badge {
+            margin: 12px 0 10px 0;
+            background: #1e293b;
+            border-left: 3px solid #38bdf8;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+        .profile-badge b {
+            color: #38bdf8;
+        }
+        .doctor-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background: #1f2937;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .doctor-card:hover {
+            background: #374151;
+        }
+        .doctor-card.active-zhouhui {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.15);
+        }
+        .doctor-card.active-xuweiguang {
+            border-color: #0284c7;
+            background: rgba(2, 132, 199, 0.15);
+        }
+        .doctor-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .doctor-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .doctor-desc {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+        .radio-circle {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #4b5563;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .active-zhouhui .radio-circle {
+            border-color: #8b5cf6;
+            background: #8b5cf6;
+        }
+        .active-xuweiguang .radio-circle {
+            border-color: #0284c7;
+            background: #0284c7;
+        }
+        .radio-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffffff;
+            display: none;
+        }
+        .active-zhouhui .radio-dot,
+        .active-xuweiguang .radio-dot {
+            display: block;
+        }
+        .footer {
+            margin-top: 14px;
+            font-size: 11px;
+            color: #6b7280;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .status-msg {
+            margin-top: 8px;
+            font-size: 11px;
+            text-align: center;
+            color: #10b981;
+            font-weight: 500;
+            min-height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-icon">🏥</div>
+        <div>
+            <div class="header-title">医疗自媒体发布助手</div>
+            <div class="header-subtitle">多平台协同 · 个人资料专属配置</div>
+        </div>
+    </div>
+
+    <div class="profile-badge">
+        💡 <b>当前 Chrome 个人资料设置</b><br>
+        选定医生后将永久绑定至此浏览器窗口，并在百家号、抖音、视频号、小红书同步生效。
+    </div>
+
+    <div class="doctor-card" id="card-zhouhui" data-doctor="zhouhui">
+        <div class="doctor-info">
+            <div class="doctor-name">
+                👨‍⚕️ 周辉
+                <span style="font-size: 10px; background: #8b5cf6; color: #fff; padding: 1px 6px; border-radius: 10px;">面瘫/面肌痉挛</span>
+            </div>
+            <div class="doctor-desc">小荷健康小程序 · 自动识别面神经标签</div>
+        </div>
+        <div class="radio-circle">
+            <div class="radio-dot"></div>
+        </div>
+    </div>
+
+    <div class="doctor-card" id="card-xuweiguang" data-doctor="xuweiguang">
+        <div class="doctor-info">
+            <div class="doctor-name">
+                👨‍⚕️ 徐伟光
+                <span style="font-size: 10px; background: #0284c7; color: #fff; padding: 1px 6px; border-radius: 10px;">脑积水/脑脊液</span>
+            </div>
+            <div class="doctor-desc">小荷健康小程序 · 自动识别脑科标签</div>
+        </div>
+        <div class="radio-circle">
+            <div class="radio-dot"></div>
+        </div>
+    </div>
+
+    <div class="status-msg" id="status-msg"></div>
+
+    <div class="footer">
+        不同 Chrome 个人资料（Profile）可分别设置<br>各自独立存储，互不影响
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
