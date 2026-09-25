@@ -7,6 +7,7 @@
 | 插件 | 目录 / id | 版本 | 说明 |
 |------|-----------|------|------|
 | 封面路径助手 | eagle-cover-path-helper | 1.1.1 | 复制封面路径；serviceMode 仅 onPluginRun，无 startup fallback |
+| 剪贴板一键重命名 | eagle-clipboard-renamer | 1.0.0 | 读取最新剪贴板内容直接重命名选中素材；serviceMode 仅 onPluginRun |
 | 格式化重命名 | eagle-format-renamer | 1.0.4 | 批量按模板改名 |
 | 视频首帧封面 | eagle-video-first-frame-cover | 1.0.6 | 提取首帧设封面 |
 | 视频导出 JPG | eagle-video-jpg-export | 1.2.1 | 视频帧导出 JPG |

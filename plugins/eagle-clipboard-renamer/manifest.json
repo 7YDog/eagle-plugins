@@ -1,0 +1,40 @@
+{
+  "id": "eagle-clipboard-renamer",
+  "version": "1.0.0",
+  "platform": "all",
+  "arch": "all",
+  "name": "剪贴板一键重命名",
+  "description": "读取剪贴板最新文本，一键重命名选中的素材（适合 OCR 提取视频标题后直接贴名）",
+  "logo": "./logo.png",
+  "keywords": [
+    "rename",
+    "clipboard",
+    "ocr",
+    "title",
+    "重命名",
+    "剪贴板",
+    "标题"
+  ],
+  "devTools": false,
+  "main": {
+    "runAfterInstall": false,
+    "serviceMode": true,
+    "frame": false,
+    "childWindow": true,
+    "url": "index.html",
+    "width": 1,
+    "minWidth": 1,
+    "maxWidth": 1,
+    "height": 1,
+    "minHeight": 1,
+    "maxHeight": 1,
+    "resizable": false,
+    "opacity": 0,
+    "followCursor": false,
+    "alwaysOnTop": false,
+    "fullscreenable": false,
+    "maximizable": false,
+    "minimizable": false,
+    "multiple": false
+  }
+}
