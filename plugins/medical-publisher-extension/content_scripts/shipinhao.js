@@ -4,7 +4,7 @@
     if (window.__MEDICAL_SHIPINHAO_LOADED) return;
     window.__MEDICAL_SHIPINHAO_LOADED = true;
 
-    // Doctor Configuration
+    // Doctor Configuration (默认出厂值)
     const DOCTOR_CONFIG = {
         xuweiguang: {
             name: '徐伟光',
@@ -12,21 +12,38 @@
             locationKeyword: '广东药科大学附属第一医院(农林院本部)',
             locationTargetName: '广东药科大学附属第一医院(农林院本部)',
             locationMatchFn: (txt) => {
-                return txt.includes('农林院本部') && txt.includes('农林下路19号') &&
+                return txt.includes('农林院本部') && (txt.includes('农林下路19号') || txt.includes('广东药科大学')) &&
                     !txt.includes('停车场') && !txt.includes('神经外科') && !txt.includes('门诊');
             }
         },
         zhouhui: {
             name: '周辉',
             color: '#7c3aed',
-            locationKeyword: localStorage.getItem('__MEDICAL_ZHOUHUI_SPH_LOC') || '广东药科大学附属第一医院(农林院本部)',
+            locationKeyword: '广东药科大学附属第一医院(农林院本部)',
             locationTargetName: '广东药科大学附属第一医院(农林院本部)',
             locationMatchFn: (txt) => {
-                return txt.includes('农林院本部') && txt.includes('农林下路19号') &&
+                return txt.includes('农林院本部') && (txt.includes('农林下路19号') || txt.includes('广东药科大学')) &&
                     !txt.includes('停车场') && !txt.includes('神经外科') && !txt.includes('门诊');
             }
         }
     };
+
+    function getDynamicConfig() {
+        try {
+            const raw = document.documentElement && document.documentElement.getAttribute('data-medical-config');
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return null;
+    }
+
+    function getDoctorLocation(doc) {
+        const config = getDynamicConfig();
+        const custom = config && config[doc];
+        if (custom && custom.location) {
+            return custom.location;
+        }
+        return DOCTOR_CONFIG[doc] ? DOCTOR_CONFIG[doc].locationKeyword : '广东药科大学附属第一医院(农林院本部)';
+    }
 
     // Remove existing panel if present
     const oldPanel = document.getElementById('medical-shipinhao-panel');
@@ -173,10 +190,11 @@
 
                 // 2. 输入搜索关键词
                 const searchInput = sr.querySelector("input[placeholder*='搜索附近位置']");
+                const targetLocation = getDoctorLocation(currentDoctor);
                 if (searchInput) {
                     searchInput.focus();
                     const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-                    setter.call(searchInput, docConfig.locationKeyword);
+                    setter.call(searchInput, targetLocation);
                     searchInput.dispatchEvent(new Event('input', { bubbles: true }));
                     searchInput.dispatchEvent(new Event('change', { bubbles: true }));
 
@@ -358,6 +376,12 @@
             renderPanel();
             updatePanelUI();
         }
+    });
+
+    // 监听后台配置修改广播（自定义定位地址实时更新）
+    window.addEventListener('__MEDICAL_CONFIG_READY__', () => {
+        renderPanel();
+        updatePanelUI();
     });
 
     // Update UI based on real-time state

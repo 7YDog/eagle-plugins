@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医疗自媒体发布助手 · 后台管理系统</title>
+    <link rel="stylesheet" href="popup.html">
+    <style>
+        body {
+            width: 100% !important;
+            max-width: 640px !important;
+            margin: 40px auto !important;
+            background: #090d16 !important;
+            border-radius: 16px !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px #1e293b !important;
+            padding: 30px !important;
+        }
+    </style>
+</head>
+<body class="is-options-page">
+    <!-- 将复用 popup 内部结构 -->
+    <div id="options-root"></div>
+    <script>
+        // Fetch and inject popup HTML structure for seamless single-source maintenance
+        fetch('popup.html')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                // Remove header action button when already in full options page
+                const openBtn = doc.getElementById('btn-open-options');
+                if (openBtn) openBtn.remove();
+                document.body.innerHTML = doc.body.innerHTML;
+                
+                // Load script
+                const s = document.createElement('script');
+                s.src = 'popup.js';
+                document.body.appendChild(s);
+            });
+    </script>
+</body>
+</html>

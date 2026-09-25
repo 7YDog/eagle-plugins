@@ -19,24 +19,53 @@
     let isRunning = false;
     let isMinimized = false;
 
-    // 周辉/徐伟光 智能标签规则
+    // 周辉/徐伟光 智能标签规则 (默认出厂值)
     const DOCTOR_TAGS = {
         xuweiguang: ['#医生日常', '#脑积水', '#脑脊液', '#我要上热门', '#硬核科普健康行动'],
         zhouhui_spasm: ['#面肌痉挛', '#我要上热门', '#眼皮跳', '#硬核科普健康行动'],
         zhouhui_palsy: ['#面瘫', '#面瘫后遗症', '#我要上热门', '#硬核科普健康行动']
     };
 
+    function parseTagList(str, defaultTags) {
+        if (!str) return defaultTags;
+        if (Array.isArray(str)) return str;
+        const list = str
+            .replace(/，|,/g, ' ')
+            .split(/\s+/)
+            .map(t => t.trim())
+            .filter(t => t.length > 0)
+            .map(t => t.startsWith('#') ? t : '#' + t);
+        return list.length > 0 ? list : defaultTags;
+    }
+
+    function getDynamicConfig() {
+        try {
+            const raw = document.documentElement && document.documentElement.getAttribute('data-medical-config');
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return null;
+    }
+
     function getDoctorTargetTags(doc, text = '') {
+        const config = getDynamicConfig();
+        const zh = config && config.zhouhui;
+        const xwg = config && config.xuweiguang;
+
         if (doc === 'zhouhui') {
+            const spasmTags = parseTagList(zh && zh.tags_spasm, DOCTOR_TAGS.zhouhui_spasm);
+            const palsyTags = parseTagList(zh && zh.tags_palsy, DOCTOR_TAGS.zhouhui_palsy);
+
             if (text.includes('面肌痉挛')) {
-                return { type: '面肌痉挛', tags: DOCTOR_TAGS.zhouhui_spasm };
+                return { type: '面肌痉挛', tags: spasmTags };
             } else if (text.includes('面瘫')) {
-                return { type: '面瘫', tags: DOCTOR_TAGS.zhouhui_palsy };
+                return { type: '面瘫', tags: palsyTags };
             } else {
-                return { type: '默认(面瘫)', tags: DOCTOR_TAGS.zhouhui_palsy };
+                return { type: '默认(面瘫)', tags: palsyTags };
             }
         }
-        return { type: '脑科', tags: DOCTOR_TAGS.xuweiguang };
+
+        const xwgTags = parseTagList(xwg && xwg.tags_default, DOCTOR_TAGS.xuweiguang);
+        return { type: '脑科', tags: xwgTags };
     }
 
     // Detect doctor from Chrome profile binding or editor text/title
@@ -448,6 +477,12 @@
             renderPanel();
             updatePanelUI();
         }
+    });
+
+    // 监听后台配置修改广播（自定义标签实时更新）
+    window.addEventListener('__MEDICAL_CONFIG_READY__', () => {
+        renderPanel();
+        updatePanelUI();
     });
 
     // Update UI based on intelligent recognition

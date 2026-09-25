@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医疗自媒体发布助手</title>
+    <title>医疗自媒体发布助手 · 控制后台</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,76 +12,152 @@
             user-select: none;
         }
         body {
-            width: 320px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #111827;
-            color: #f9fafb;
+            width: 460px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
             padding: 16px;
+            line-height: 1.5;
+        }
+        /* Options page adaptation */
+        body.is-options-page {
+            width: 100%;
+            max-width: 680px;
+            margin: 40px auto;
+            background: #090d16;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px #1e293b;
+            padding: 28px;
         }
         .header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             padding-bottom: 12px;
-            border-bottom: 1px solid #1f2937;
+            border-bottom: 1px solid #1e293b;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .header-icon {
-            font-size: 22px;
+            font-size: 24px;
         }
         .header-title {
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             color: #ffffff;
+            letter-spacing: 0.2px;
         }
         .header-subtitle {
             font-size: 11px;
-            color: #9ca3af;
-            margin-top: 2px;
+            color: #94a3b8;
+            margin-top: 1px;
         }
-        .profile-badge {
-            margin: 12px 0 10px 0;
+        .header-action-btn {
             background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        .header-action-btn:hover {
+            background: #334155;
+            color: #f8fafc;
+        }
+
+        /* Nav Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+            background: #1e293b;
+            padding: 4px;
+            border-radius: 8px;
+            margin: 14px 0;
+        }
+        .nav-tab {
+            flex: 1;
+            text-align: center;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #94a3b8;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .nav-tab:hover {
+            color: #f1f5f9;
+        }
+        .nav-tab.active {
+            background: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+        }
+
+        /* Tab Content */
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* Profile Banner */
+        .profile-banner {
+            background: rgba(56, 189, 248, 0.08);
             border-left: 3px solid #38bdf8;
-            padding: 8px 10px;
+            padding: 8px 12px;
             border-radius: 4px;
             font-size: 12px;
             color: #94a3b8;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
-        .profile-badge b {
+        .profile-banner b {
             color: #38bdf8;
         }
+
+        /* Doctor Selection Cards */
         .doctor-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            background: #1f2937;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            background: #1e293b;
             border: 2px solid transparent;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
         .doctor-card:hover {
-            background: #374151;
+            background: #273549;
+            transform: translateY(-1px);
         }
         .doctor-card.active-zhouhui {
             border-color: #8b5cf6;
-            background: rgba(139, 92, 246, 0.15);
+            background: rgba(139, 92, 246, 0.12);
         }
         .doctor-card.active-xuweiguang {
             border-color: #0284c7;
-            background: rgba(2, 132, 199, 0.15);
+            background: rgba(2, 132, 199, 0.12);
         }
         .doctor-info {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
         }
         .doctor-name {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: #ffffff;
             display: flex;
             align-items: center;
@@ -89,7 +165,7 @@
         }
         .doctor-desc {
             font-size: 11px;
-            color: #9ca3af;
+            color: #94a3b8;
         }
         .radio-circle {
             width: 18px;
@@ -120,67 +196,281 @@
         .active-xuweiguang .radio-dot {
             display: block;
         }
-        .footer {
-            margin-top: 14px;
-            font-size: 11px;
-            color: #6b7280;
-            text-align: center;
-            line-height: 1.4;
+
+        /* Config Sub Pills */
+        .sub-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
         }
+        .sub-pill {
+            flex: 1;
+            padding: 6px 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .sub-pill:hover {
+            color: #e2e8f0;
+        }
+        .sub-pill.active-zhouhui {
+            background: #7c3aed;
+            color: white;
+            border-color: #7c3aed;
+            box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
+        }
+        .sub-pill.active-xuweiguang {
+            background: #0284c7;
+            color: white;
+            border-color: #0284c7;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+        }
+
+        /* Config Form */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 4px;
+        }
+        .form-label span {
+            color: #64748b;
+            font-weight: normal;
+        }
+        .form-input, .form-textarea {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #f8fafc;
+            padding: 8px 10px;
+            font-size: 12px;
+            font-family: inherit;
+            line-height: 1.4;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            user-select: text;
+        }
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+        .form-textarea {
+            resize: vertical;
+            min-height: 54px;
+        }
+        .form-hint {
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .btn-primary {
+            flex: 2;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+        }
+        .btn-secondary {
+            flex: 1;
+            background: #334155;
+            color: #cbd5e1;
+            border: none;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #475569;
+            color: #ffffff;
+        }
+
+        /* Status Toast */
         .status-msg {
-            margin-top: 8px;
+            margin-top: 10px;
             font-size: 11px;
             text-align: center;
             color: #10b981;
-            font-weight: 500;
-            min-height: 16px;
+            font-weight: 600;
+            min-height: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .footer {
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid #1e293b;
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="header-icon">🏥</div>
-        <div>
-            <div class="header-title">医疗自媒体发布助手</div>
-            <div class="header-subtitle">多平台协同 · 个人资料专属配置</div>
-        </div>
-    </div>
-
-    <div class="profile-badge">
-        💡 <b>当前 Chrome 个人资料设置</b><br>
-        选定医生后将永久绑定至此浏览器窗口，并在百家号、抖音、视频号、小红书同步生效。
-    </div>
-
-    <div class="doctor-card" id="card-zhouhui" data-doctor="zhouhui">
-        <div class="doctor-info">
-            <div class="doctor-name">
-                👨‍⚕️ 周辉
-                <span style="font-size: 10px; background: #8b5cf6; color: #fff; padding: 1px 6px; border-radius: 10px;">面瘫/面肌痉挛</span>
+        <div class="header-left">
+            <div class="header-icon">🏥</div>
+            <div>
+                <div class="header-title">医疗自媒体发布助手</div>
+                <div class="header-subtitle">多账号隔离 · 规则与链接配置后台</div>
             </div>
-            <div class="doctor-desc">小荷健康小程序 · 自动识别面神经标签</div>
         </div>
-        <div class="radio-circle">
-            <div class="radio-dot"></div>
+        <button id="btn-open-options" class="header-action-btn" title="在独立大窗口打开配置后台">
+            <span>⚙️ 独立后台</span> ↗
+        </button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <div class="nav-tab active" id="tab-btn-profile" data-tab="tab-profile">
+            📌 账号身份绑定
+        </div>
+        <div class="nav-tab" id="tab-btn-config" data-tab="tab-config">
+            ⚙️ 规则与链接配置
         </div>
     </div>
 
-    <div class="doctor-card" id="card-xuweiguang" data-doctor="xuweiguang">
-        <div class="doctor-info">
-            <div class="doctor-name">
-                👨‍⚕️ 徐伟光
-                <span style="font-size: 10px; background: #0284c7; color: #fff; padding: 1px 6px; border-radius: 10px;">脑积水/脑脊液</span>
-            </div>
-            <div class="doctor-desc">小荷健康小程序 · 自动识别脑科标签</div>
+    <!-- TAB 1: Profile Binding -->
+    <div class="tab-panel active" id="tab-profile">
+        <div class="profile-banner">
+            💡 <b>当前 Chrome 个人资料设置</b><br>
+            选定医生后将永久绑定至此 Chrome 用户环境，百家号、抖音、视频号、小红书全平台实时生效。
         </div>
-        <div class="radio-circle">
-            <div class="radio-dot"></div>
+
+        <div class="doctor-card" id="card-zhouhui" data-doctor="zhouhui">
+            <div class="doctor-info">
+                <div class="doctor-name">
+                    👨‍⚕️ 周辉
+                    <span style="font-size: 10px; background: #8b5cf6; color: #fff; padding: 1px 6px; border-radius: 10px;">面瘫/面肌痉挛</span>
+                </div>
+                <div class="doctor-desc">小荷 AI 医生 · 自动匹配面神经专属病种标签</div>
+            </div>
+            <div class="radio-circle">
+                <div class="radio-dot"></div>
+            </div>
+        </div>
+
+        <div class="doctor-card" id="card-xuweiguang" data-doctor="xuweiguang">
+            <div class="doctor-info">
+                <div class="doctor-name">
+                    👨‍⚕️ 徐伟光
+                    <span style="font-size: 10px; background: #0284c7; color: #fff; padding: 1px 6px; border-radius: 10px;">脑积水/脑脊液</span>
+                </div>
+                <div class="doctor-desc">小荷 AI 医生 · 自动匹配脑科专属病种标签</div>
+            </div>
+            <div class="radio-circle">
+                <div class="radio-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: Backend Configuration -->
+    <div class="tab-panel" id="tab-config">
+        <!-- Doctor sub selector pills -->
+        <div class="sub-pills">
+            <div class="sub-pill active-zhouhui" id="sub-pill-zhouhui" data-sub="zhouhui">
+                👨‍⚕️ 周辉医生配置
+            </div>
+            <div class="sub-pill" id="sub-pill-xuweiguang" data-sub="xuweiguang">
+                👨‍⚕️ 徐伟光医生配置
+            </div>
+        </div>
+
+        <!-- Zhou Hui Config Group -->
+        <div id="group-zhouhui">
+            <div class="form-group">
+                <label class="form-label">🔗 抖音小荷 AI 医生链接 <span>(Token URL)</span></label>
+                <input type="text" id="zh-microapp-url" class="form-input" placeholder="输入周辉的抖音小荷小程序分享链接">
+                <div class="form-hint">抖音发布时将自动切换【小程序】并填入该链接自动挂载</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🏷️ 面肌痉挛预设标签 <span>(空格分隔)</span></label>
+                <textarea id="zh-tags-spasm" class="form-textarea" placeholder="#面肌痉挛 #我要上热门 #眼皮跳 #硬核科普健康行动"></textarea>
+                <div class="form-hint">标题或正文含“面肌痉挛/眼皮跳/抽搐”时自动触发此组标签</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🏷️ 面瘫预设标签（及兜底默认） <span>(空格分隔)</span></label>
+                <textarea id="zh-tags-palsy" class="form-textarea" placeholder="#面瘫 #面瘫后遗症 #我要上热门 #硬核科普健康行动"></textarea>
+                <div class="form-hint">标题含“面瘫/嘴歪”或未识别出特定病种时自动优选此组标签</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📍 微信视频号定位院区</label>
+                <input type="text" id="zh-location" class="form-input" placeholder="广东药科大学附属第一医院(农林院本部)">
+                <div class="form-hint">视频号助手将自动搜索并精准选定该院区具体地址</div>
+            </div>
+        </div>
+
+        <!-- Xu Weiguang Config Group -->
+        <div id="group-xuweiguang" style="display: none;">
+            <div class="form-group">
+                <label class="form-label">🔗 抖音小荷 AI 医生链接 <span>(Token URL)</span></label>
+                <input type="text" id="xwg-microapp-url" class="form-input" placeholder="输入徐伟光的抖音小荷小程序分享链接">
+                <div class="form-hint">抖音发布时将自动切换【小程序】并填入该链接自动挂载</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🏷️ 脑科预设标签 <span>(空格分隔)</span></label>
+                <textarea id="xwg-tags-default" class="form-textarea" placeholder="#医生日常 #脑积水 #脑脊液 #我要上热门 #硬核科普健康行动"></textarea>
+                <div class="form-hint">标题或正文含“脑积水/脑脊液”或徐伟光身份时自动触发</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📍 微信视频号定位院区</label>
+                <input type="text" id="xwg-location" class="form-input" placeholder="广东药科大学附属第一医院(农林院本部)">
+                <div class="form-hint">视频号助手将自动搜索并精准选定该院区具体地址</div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button id="btn-save-config" class="btn-primary">
+                💾 保存全部配置
+            </button>
+            <button id="btn-reset-config" class="btn-secondary" title="重置为系统出厂预设值">
+                🔄 恢复默认
+            </button>
         </div>
     </div>
 
     <div class="status-msg" id="status-msg"></div>
 
     <div class="footer">
-        不同 Chrome 个人资料（Profile）可分别设置<br>各自独立存储，互不影响
+        医疗自媒体发布助手 · 设置即时同步至百家号/抖音/视频号/小红书
     </div>
 
     <script src="popup.js"></script>

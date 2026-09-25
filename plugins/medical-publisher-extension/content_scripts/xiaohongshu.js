@@ -4,7 +4,7 @@
     if (window.__MEDICAL_XIAOHONGSHU_LOADED) return;
     window.__MEDICAL_XIAOHONGSHU_LOADED = true;
 
-    // Doctor Configuration
+    // Doctor Configuration (默认出厂值)
     const DOCTOR_CONFIG = {
         xuweiguang: {
             name: '徐伟光',
@@ -27,6 +27,48 @@
             }
         }
     };
+
+    function parseTagList(str, defaultTags) {
+        if (!str) return defaultTags;
+        if (Array.isArray(str)) return str;
+        const list = str
+            .replace(/，|,/g, ' ')
+            .split(/\s+/)
+            .map(t => t.trim())
+            .filter(t => t.length > 0)
+            .map(t => t.startsWith('#') ? t : '#' + t);
+        return list.length > 0 ? list : defaultTags;
+    }
+
+    function getDynamicConfig() {
+        try {
+            const raw = document.documentElement && document.documentElement.getAttribute('data-medical-config');
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return null;
+    }
+
+    function getDoctorTopics(doc, text = '') {
+        const config = getDynamicConfig();
+        const zh = config && config.zhouhui;
+        const xwg = config && config.xuweiguang;
+
+        if (doc === 'zhouhui') {
+            const spasmTags = parseTagList(zh && zh.tags_spasm, ['#面肌痉挛', '#我要上热门', '#眼皮跳', '#硬核科普健康行动']);
+            const palsyTags = parseTagList(zh && zh.tags_palsy, ['#面瘫', '#面瘫后遗症', '#我要上热门', '#硬核科普健康行动']);
+
+            if (text.includes('面肌痉挛')) {
+                return { type: '面肌痉挛', tags: spasmTags };
+            } else if (text.includes('面瘫')) {
+                return { type: '面瘫', tags: palsyTags };
+            } else {
+                return { type: '默认(面瘫)', tags: palsyTags };
+            }
+        }
+
+        const xwgTags = parseTagList(xwg && xwg.tags_default, DOCTOR_CONFIG.xuweiguang.topics);
+        return { type: '脑科', tags: xwgTags };
+    }
 
     // Remove existing panel if present
     const oldPanel = document.getElementById('medical-xiaohongshu-panel');
@@ -400,6 +442,12 @@
         }
     });
 
+    // 监听后台配置修改广播（自定义话题标签实时更新）
+    window.addEventListener('__MEDICAL_CONFIG_READY__', () => {
+        renderPanel();
+        updatePanelUI();
+    });
+
     // Update UI based on real-time state
     function updatePanelUI() {
         if (isRunning) return;
@@ -442,8 +490,9 @@
         const litCount = edInfo.litCount;
 
         const fullText = (edInfo.title + ' ' + edInfo.text).trim();
+        const diseaseInfo = getDoctorTopics(currentDoctor, fullText);
         const diseaseBadge = (currentDoctor === 'zhouhui')
-            ? `<span style="font-size: 10px; background: #8b5cf6; color: #fff; padding: 1px 6px; border-radius: 4px; margin-left: 6px;">${DOCTOR_CONFIG.zhouhui.getTopics(fullText).type}</span>`
+            ? `<span style="font-size: 10px; background: #8b5cf6; color: #fff; padding: 1px 6px; border-radius: 4px; margin-left: 6px;">${diseaseInfo.type}</span>`
             : `<span style="font-size: 10px; background: #0284c7; color: #fff; padding: 1px 6px; border-radius: 4px; margin-left: 6px;">脑积水/脑脊液</span>`;
 
         let statusHtml = `

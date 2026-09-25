@@ -4,7 +4,7 @@
     if (window.__MEDICAL_DOUYIN_LOADED) return;
     window.__MEDICAL_DOUYIN_LOADED = true;
 
-    // Doctor Configuration
+    // Doctor Configuration (默认出厂值)
     const DOCTOR_CONFIG = {
         xuweiguang: {
             name: '徐伟光',
@@ -19,6 +19,26 @@
             microappName: '小荷AI医生'
         }
     };
+
+    function getDynamicConfig() {
+        try {
+            const raw = document.documentElement && document.documentElement.getAttribute('data-medical-config');
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return null;
+    }
+
+    function getDoctorConfig(doc) {
+        const base = DOCTOR_CONFIG[doc] || DOCTOR_CONFIG.xuweiguang;
+        const config = getDynamicConfig();
+        const custom = config && config[doc];
+        return {
+            name: base.name,
+            color: base.color,
+            microappUrl: (custom && custom.microappUrl) ? custom.microappUrl : base.microappUrl,
+            microappName: (custom && custom.microappName) ? custom.microappName : base.microappName
+        };
+    }
 
     // Remove existing panel if present
     const oldPanel = document.getElementById('medical-douyin-panel');
@@ -87,7 +107,7 @@
         if (isRunning) return;
         isRunning = true;
 
-        const docConfig = DOCTOR_CONFIG[currentDoctor] || DOCTOR_CONFIG.xuweiguang;
+        const docConfig = getDoctorConfig(currentDoctor);
         const targetUrl = docConfig.microappUrl;
         const targetName = docConfig.microappName;
 
@@ -251,7 +271,7 @@
     }
 
     function renderPanel() {
-        const docConfig = DOCTOR_CONFIG[currentDoctor] || DOCTOR_CONFIG.xuweiguang;
+        const docConfig = getDoctorConfig(currentDoctor);
 
         panel.innerHTML = `
             <div id="dy-drag-header" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #1e293b; background: #1e293b; border-radius: 12px 12px 0 0;">
@@ -324,13 +344,19 @@
         }
     });
 
+    // 监听后台配置修改广播（自定义小荷链接实时更新）
+    window.addEventListener('__MEDICAL_CONFIG_READY__', () => {
+        renderPanel();
+        updatePanelUI();
+    });
+
     // Update UI based on intelligent recognition
     function updatePanelUI() {
         if (isRunning) return;
 
         autoDetectDoctor();
 
-        const docConfig = DOCTOR_CONFIG[currentDoctor] || DOCTOR_CONFIG.xuweiguang;
+        const docConfig = getDoctorConfig(currentDoctor);
         const docBadge = document.getElementById('dy-doctor-badge');
         if (docBadge) {
             docBadge.innerText = docConfig.name;
